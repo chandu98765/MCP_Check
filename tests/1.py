@@ -1,11 +1,19 @@
 import requests
+import os
 
-# def getsession_id():
+# Load GitHub token from environment variable
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+
+if not GITHUB_TOKEN:
+    print("Error: GITHUB_TOKEN environment variable is not set.")
+    print("Please set it before running this script:")
+    print("  export GITHUB_TOKEN='your_github_token_here'")
+    exit(1)
 
 login_url = "https://api.githubcopilot.com/mcp/session"
 headers = {
-"Authorization": "Bearer GITHUB_TOKEN_REDACTED",
-"Accept": "application/json"
+    "Authorization": f"Bearer {GITHUB_TOKEN}",
+    "Accept": "application/json"
 }
 
 login_response = requests.post(login_url, headers=headers)
@@ -26,7 +34,7 @@ print(login_response)
 
 # # Authentication details (update as required)
 # headers = {
-#     "Authorization": "Bearer GITHUB_TOKEN_REDACTED",
+#     "Authorization": f"Bearer {GITHUB_TOKEN}",
 #     "Accept": "application/json"
 # }
 
